@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "693115927968",
+    "firebase_url": "https://ffgrkstuetzpunktorganisation.firebaseio.com",
+    "project_id": "ffgrkstuetzpunktorganisation",
+    "storage_bucket": "ffgrkstuetzpunktorganisation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693115927968:android:2bce990387b4220c",
+        "android_client_info": {
+          "package_name": "com.example.feuerwehrorganisation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693115927968-q76pad59ncbau26itlrmiei9r7jm4udh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.feuerwehrorganisation",
+            "certificate_hash": "615846b5464c228d928f59174fca620a76b38435"
+          }
+        },
+        {
+          "client_id": "693115927968-jtqgvfj55b4kknsu129rhrhocrq82dp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4S8jeICMCYirB2Rkaa0_vr8hVuzVTieE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693115927968-jtqgvfj55b4kknsu129rhrhocrq82dp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
