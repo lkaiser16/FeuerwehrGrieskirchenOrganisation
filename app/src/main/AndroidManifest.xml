@@ -20,9 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NewAuftragActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".NewAuftrag.NewAuftragActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.RegisterActivity" />
 
     </application>
 

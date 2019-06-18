@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.feuerwehrorganisation.login.LoginActivity;
+import com.example.feuerwehrorganisation.NewAuftrag.Auftrag;
+import com.example.feuerwehrorganisation.NewAuftrag.NewAuftragActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener
+public class MainActivity extends AppCompatActivity
 {
     MenuItem refresh;
     List<Auftrag> auftragList;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
     Toolbar toolbar;
     RecyclerView overView;
 
-    MyRecyclerViewAdapter adapter;
+    MainActivityShowCarsAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,10 +49,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
 
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
+
     public void initialize()
     {
 
@@ -64,12 +62,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
 
         fab = findViewById(R.id.fab);
         toolbar = findViewById(R.id.toolbar);
-        overView = findViewById(R.id.overView);
+//        overView = findViewById(R.id.overView);
 
-        overView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this, auftragList);
-        adapter.setClickListener(this);
-        overView.setAdapter(adapter);
+//        overView.setLayoutManager(new LinearLayoutManager(this));
+
+//        overView.setAdapter(adapter);
 
     }
 
@@ -162,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
         Auftrag auftrag = (Auftrag) getIntent().getSerializableExtra("Auftrag");
 
             auftragList.add(auftrag);
-            adapter.notifyDataSetChanged();
+//            adapter.notifyDataSetChanged();
 
     }
 

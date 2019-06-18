@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <RelativeLayout
+        android:id="@+id/all"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -70,25 +73,35 @@
             android:textAlignment="center" />
 
 
+        <ListView
+            android:id="@+id/cars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/button2"
+            >
+
+        </ListView>
 
         <Button
             android:id="@+id/speichern"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/button2"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="630dp"
             android:fontFamily="sans-serif-thin"
             android:text="speichern"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_blue_light" />
-        <LinearLayout
-            android:id="@+id/checkBoxAutos"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="horizontal"></LinearLayout>
+            android:textColor="@android:color/holo_blue_light"></Button>
 
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/checkBoxAutos"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_below="@id/button2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:orientation="horizontal"></LinearLayout>-->
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

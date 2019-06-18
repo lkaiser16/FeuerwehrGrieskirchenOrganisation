@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -20,9 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/einträge"
-        layout="@layout/content_main" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

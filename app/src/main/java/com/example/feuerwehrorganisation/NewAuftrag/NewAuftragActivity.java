@@ -1,4 +1,4 @@
-package com.example.feuerwehrorganisation;
+package com.example.feuerwehrorganisation.NewAuftrag;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -10,23 +10,28 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.feuerwehrorganisation.Fahrzeug;
+import com.example.feuerwehrorganisation.Logic;
+import com.example.feuerwehrorganisation.MainActivity;
+import com.example.feuerwehrorganisation.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,20 +42,25 @@ public class NewAuftragActivity extends AppCompatActivity
 {
     int THECOUNTER;
     FirebaseFirestore db;
+    FirebaseAuth mAuth;
     EditText name;
     Button speichern;
     EditText datum;
     EditText uhrzeitEdittext;
 
 
-    ArrayAdapter<String> adapter;
     List<Fahrzeug> fahrzeugeList;
     List<Fahrzeug> selectedFahrzeuge;
     List<Auftrag> listAufträge;
 
+    ListView cars;
+    NewAuftragActivityCarsListAdapter adapter;
     final Calendar myCalendar = Calendar.getInstance();
     Auftrag derAuftrag = null;
     Logic logic = new Logic();
+
+
+    FirebaseUser currenUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -71,17 +81,24 @@ public class NewAuftragActivity extends AppCompatActivity
     public void initializeVar()
     {
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        cars = findViewById(R.id.cars);
+
 
         fahrzeugeList = new ArrayList<>();
         listAufträge = new ArrayList<>();
         selectedFahrzeuge = new ArrayList<>();
-
+        adapter = new NewAuftragActivityCarsListAdapter(this, R.layout.auftrag_activity_cars_list_adapter, fahrzeugeList);
+        cars.setAdapter(adapter);
 
         datum = findViewById(R.id.datum);
         name = findViewById(R.id.text);
         uhrzeitEdittext = findViewById(R.id.uhrzeit);
 
         speichern = findViewById(R.id.speichern);
+
+
+        currenUser = mAuth.getCurrentUser();
     }
 
     public void listeners()
@@ -94,7 +111,7 @@ public class NewAuftragActivity extends AppCompatActivity
 
                 speichern();
                 Intent i = new Intent(NewAuftragActivity.this, MainActivity.class);
-                i.putExtra("Auftrag",  derAuftrag);
+                i.putExtra("Auftrag", derAuftrag);
                 finish();
             }
         });
@@ -148,12 +165,13 @@ public class NewAuftragActivity extends AppCompatActivity
                         fahrzeugeList.add(f);
                         Log.d("", document.getId() + " => " + document.getData());
                     }
-                    addCheckboxCars(fahrzeugeList);
+//                    addCheckboxCars(fahrzeugeList);
 
                 } else
                 {
                     Log.w("", "Error getting documents.", task.getException());
                 }
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -179,7 +197,8 @@ public class NewAuftragActivity extends AppCompatActivity
 
     public void addCheckboxCars(final List<Fahrzeug> fahrzeuge)
     {
-        LinearLayout linearLayout = findViewById(R.id.checkBoxAutos);
+        LinearLayout linearLayout = null;
+//         linearLayout = findViewById(R.id.checkBoxAutos);
 
         // Create Checkbox Dynamically
         for (THECOUNTER = 0; THECOUNTER < fahrzeuge.size(); THECOUNTER++)
@@ -239,6 +258,7 @@ public class NewAuftragActivity extends AppCompatActivity
     {
         readFahrzeuge();
 
+
     }
 
     public void speichern()
@@ -246,8 +266,9 @@ public class NewAuftragActivity extends AppCompatActivity
         String text = name.getText().toString();
         String date = datum.getText().toString();
         String uhrzeit = uhrzeitEdittext.getText().toString();
-        derAuftrag= new Auftrag(text, selectedFahrzeuge, date, uhrzeit);
+        proveSelectedCars();
 
+        derAuftrag = new Auftrag(text, selectedFahrzeuge, date, uhrzeit, currenUser.getEmail());
         writeAufragOnDB(derAuftrag);
 
     }
@@ -264,6 +285,17 @@ public class NewAuftragActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    public void proveSelectedCars()
+    {
+        for (int i = 0; i < fahrzeugeList.size(); i++)
+        {
+            if (fahrzeugeList.get(i).isSelected())
+            {
+                selectedFahrzeuge.add(fahrzeugeList.get(i));
+            }
+        }
     }
 
 

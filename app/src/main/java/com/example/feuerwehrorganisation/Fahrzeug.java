@@ -7,6 +7,7 @@ public class Fahrzeug
 {
     String bezeichnung;
     Map<String, String> sitzplätze = new HashMap<>();
+    boolean isSelected = false;
 
     public Fahrzeug()
     {
@@ -36,5 +37,21 @@ public class Fahrzeug
     public void setSitzplätze(Map<String, String> sitzplätze)
     {
         this.sitzplätze = sitzplätze;
+    }
+
+    public boolean isSelected()
+    {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected)
+    {
+        isSelected = selected;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Fahrzeug{" + "bezeichnung='" + bezeichnung + '\'' + ", sitzplätze=" + sitzplätze + ", isSelected=" + isSelected + '}';
     }
 }
