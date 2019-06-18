@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.example.feuerwehrorganisation.Eintragen.DetailActivity;
 import com.example.feuerwehrorganisation.login.LoginActivity;
 import com.example.feuerwehrorganisation.NewAuftrag.Auftrag;
 import com.example.feuerwehrorganisation.NewAuftrag.NewAuftragActivity;
@@ -20,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,9 +39,10 @@ public class MainActivity extends AppCompatActivity
     FirebaseFirestore db;
     FloatingActionButton fab;
     Toolbar toolbar;
-    RecyclerView overView;
+    ListView overView;
 
     MainActivityShowCarsAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,15 +63,12 @@ public class MainActivity extends AppCompatActivity
         auftragList = new ArrayList<>();
 
 
-        overView = findViewById(R.id.overView);
-
         fab = findViewById(R.id.fab);
         toolbar = findViewById(R.id.toolbar);
-//        overView = findViewById(R.id.overView);
 
-//        overView.setLayoutManager(new LinearLayoutManager(this));
-
-//        overView.setAdapter(adapter);
+        overView = findViewById(R.id.overView);
+        adapter = new MainActivityShowCarsAdapter(this, R.layout.main_activity_overview_adapter, auftragList);
+        overView.setAdapter(adapter);
 
     }
 
@@ -88,6 +90,20 @@ public class MainActivity extends AppCompatActivity
             }
         });
         setSupportActionBar(toolbar);
+
+        overView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+
+                Intent i = new Intent(getApplicationContext(), DetailActivity.class);
+
+                i.putExtra("Auftrag", auftragList.get(position));
+                System.out.println(auftragList.get(position));
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -114,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh)
         {
-            //refresh
+            refresh();
             return true;
         }
 
@@ -157,10 +173,11 @@ public class MainActivity extends AppCompatActivity
         super.onRestart();
 
         Auftrag auftrag = (Auftrag) getIntent().getSerializableExtra("Auftrag");
-
+        if (auftrag != null)
+        {
             auftragList.add(auftrag);
-//            adapter.notifyDataSetChanged();
-
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void writeFahrzeuge(String name)
@@ -193,8 +210,28 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void fillList()
+    public void refresh()
     {
-
+        auftragList.clear();
+        db.collection("Aufträge").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task)
+            {
+                if (task.isSuccessful())
+                {
+                    for (QueryDocumentSnapshot document : task.getResult())
+                    {
+                        Auftrag a = document.toObject(Auftrag.class);
+                        auftragList.add(a);
+                        Log.d("", document.getId() + " => " + document.getData());
+                    }
+                } else
+                {
+                    Log.w("", "Error getting documents.", task.getException());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }

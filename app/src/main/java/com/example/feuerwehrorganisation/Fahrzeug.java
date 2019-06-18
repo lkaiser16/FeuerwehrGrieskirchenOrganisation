@@ -1,9 +1,10 @@
 package com.example.feuerwehrorganisation;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Fahrzeug
+public class Fahrzeug implements Serializable
 {
     String bezeichnung;
     Map<String, String> sitzplätze = new HashMap<>();
