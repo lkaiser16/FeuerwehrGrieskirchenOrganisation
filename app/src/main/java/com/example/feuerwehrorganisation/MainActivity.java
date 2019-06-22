@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
         }
+//        writeFahrzeuge();
 //        for(int i = 1; i<4;i++)
 //        {
 //            writeFahrzeuge("Fahrzeug "+i);
@@ -180,19 +181,20 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void writeFahrzeuge(String name)
+    public void writeFahrzeuge()
     {
-        Map<String, Object> user = new HashMap<>();
-        user.put("car", "Ada");
-//        String name = "KDOF";
+
+        String name = "DLK 23-12";
         Map<String, String> sitzplätze = new HashMap<>();
         sitzplätze.put("Maschinist", "");
-        sitzplätze.put("Mann1", "");
+//        sitzplätze.put("2. Mann", "");
         sitzplätze.put("Fahrzeugkommandant", "");
-        sitzplätze.put("Mann2", "");
-        sitzplätze.put("Mann3", "");
-        sitzplätze.put("Mann4", "");
-        sitzplätze.put("Mann5", "");
+        sitzplätze.put("1. Mann", "");
+//        sitzplätze.put("3. Mann", "");
+//        sitzplätze.put("4. Mann", "");
+//        sitzplätze.put("1. AS-Träger", "");
+//        sitzplätze.put("2. AS-Träger", "");
+//        sitzplätze.put("3. AS-Träger", "");
 
 
         Fahrzeug a = new Fahrzeug(name, sitzplätze);
@@ -206,6 +208,8 @@ public class MainActivity extends AppCompatActivity
                 System.out.println("gfunkt");
             }
         });
+
+
 
     }
 
