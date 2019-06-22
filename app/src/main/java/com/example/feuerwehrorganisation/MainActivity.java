@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     ListView overView;
 
-    MainActivityShowCarsAdapter adapter;
+    MainActivityShowAufträgeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity
         auftragList = new ArrayList<>();
 
 
-        fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fabSpeichern);
         toolbar = findViewById(R.id.toolbar);
 
         overView = findViewById(R.id.overView);
-        adapter = new MainActivityShowCarsAdapter(this, R.layout.main_activity_overview_adapter, auftragList);
+        adapter = new MainActivityShowAufträgeAdapter(this, R.layout.main_activity_overview_adapter, auftragList);
         overView.setAdapter(adapter);
 
     }
@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
+
                         Auftrag a = document.toObject(Auftrag.class);
                         auftragList.add(a);
                         Log.d("", document.getId() + " => " + document.getData());

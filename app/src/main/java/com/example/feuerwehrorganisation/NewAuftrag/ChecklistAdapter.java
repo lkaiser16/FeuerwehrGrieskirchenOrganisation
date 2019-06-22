@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class NewAuftragActivityCarsListAdapter extends ArrayAdapter<Fahrzeug>
+public class ChecklistAdapter extends ArrayAdapter<Fahrzeug>
 {
     private Context mContext;
     private int resourceLayout;
@@ -24,7 +24,7 @@ public class NewAuftragActivityCarsListAdapter extends ArrayAdapter<Fahrzeug>
     List<Fahrzeug> fahrzeugeList;
     CheckBox checkbox;
 
-    public NewAuftragActivityCarsListAdapter(Context context, int resource, List<Fahrzeug> fahrzeugeList)
+    public ChecklistAdapter(Context context, int resource, List<Fahrzeug> fahrzeugeList)
     {
         super(context, resource, fahrzeugeList);
 

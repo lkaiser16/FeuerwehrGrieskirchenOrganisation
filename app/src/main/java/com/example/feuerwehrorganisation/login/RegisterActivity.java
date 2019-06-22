@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -81,6 +82,10 @@ public class RegisterActivity extends AppCompatActivity
                                 {
 
                                     currentUser = mAuth.getCurrentUser();
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(nameString).build();
+
+                                    currentUser.updateProfile(profileUpdates);
 //                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 //                                startActivity(intent);
                                     finish();

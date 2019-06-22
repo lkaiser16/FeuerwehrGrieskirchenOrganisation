@@ -14,13 +14,13 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class MainActivityShowCarsAdapter extends ArrayAdapter<Auftrag>
+public class MainActivityShowAufträgeAdapter extends ArrayAdapter<Auftrag>
 {
 
     private Context mContext;
     private int resourceLayout;
 
-    public MainActivityShowCarsAdapter(Context context, int resource, List<Auftrag> aufträge)
+    public MainActivityShowAufträgeAdapter(Context context, int resource, List<Auftrag> aufträge)
     {
         super(context, resource, aufträge);
 

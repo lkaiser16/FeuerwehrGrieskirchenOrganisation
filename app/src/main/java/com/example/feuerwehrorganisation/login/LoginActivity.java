@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity
                                 currenUser = mAuth.getCurrentUser();
                                 mEmail.setText("");
                                 mPassword.setText("");
-                                Toast.makeText(LoginActivity.this, "Guten Tag " + currenUser.getEmail() + "!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Guten Tag, " + currenUser.getEmail() + "!", Toast.LENGTH_SHORT).show();
 //                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
 //                                        startActivity(i);
                                 finish();

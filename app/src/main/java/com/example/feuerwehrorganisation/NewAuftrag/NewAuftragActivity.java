@@ -54,7 +54,7 @@ public class NewAuftragActivity extends AppCompatActivity
     List<Auftrag> listAufträge;
 
     ListView cars;
-    NewAuftragActivityCarsListAdapter adapter;
+    ChecklistAdapter adapter;
     final Calendar myCalendar = Calendar.getInstance();
     Auftrag derAuftrag = null;
     Logic logic = new Logic();
@@ -88,7 +88,7 @@ public class NewAuftragActivity extends AppCompatActivity
         fahrzeugeList = new ArrayList<>();
         listAufträge = new ArrayList<>();
         selectedFahrzeuge = new ArrayList<>();
-        adapter = new NewAuftragActivityCarsListAdapter(this, R.layout.auftrag_activity_cars_list_adapter, fahrzeugeList);
+        adapter = new ChecklistAdapter(this, R.layout.auftrag_activity_cars_list_adapter, fahrzeugeList);
         cars.setAdapter(adapter);
 
         datum = findViewById(R.id.datum);
@@ -268,7 +268,7 @@ public class NewAuftragActivity extends AppCompatActivity
         String uhrzeit = uhrzeitEdittext.getText().toString();
         proveSelectedCars();
 
-        derAuftrag = new Auftrag(text, selectedFahrzeuge, date, uhrzeit, currenUser.getEmail());
+        derAuftrag = new Auftrag(text, selectedFahrzeuge, date, uhrzeit, currenUser.getDisplayName());
         writeAufragOnDB(derAuftrag);
 
     }

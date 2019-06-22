@@ -9,7 +9,7 @@
     tools:ignore="MergeRootFrame">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabSpeichern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
@@ -47,10 +47,10 @@
                 android:id="@+id/auftragName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="150dp"
                 android:text="DetailAuftrag"
-                android:textSize="30sp"
-                android:layout_marginTop="130dp"
-                android:layout_marginLeft="10dp"/>
+                android:textSize="30sp" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -61,7 +61,7 @@
         android:id="@+id/item_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
             android:id="@+id/datumUuhrzeit"
@@ -74,10 +74,11 @@
     </android.support.v4.widget.NestedScrollView>
 
     <ListView
+        android:id="@+id/autosZumEintragen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
-        android:layout_below="@id/item_detail_container"/>
+        android:backgroundTint="@color/colorWhite"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
