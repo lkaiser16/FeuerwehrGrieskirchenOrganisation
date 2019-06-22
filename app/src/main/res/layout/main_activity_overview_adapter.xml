@@ -21,10 +21,10 @@
             android:layout_height="wrap_content"
 
             android:text="Rihanna Love the way lie"
-            android:textColor="#040404"
-            android:typeface="sans"
+            android:textColor="#FFFFFF"
             android:textSize="15dip"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <!-- Artist Name -->
         <TextView
@@ -32,7 +32,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:textColor="#343434"
+            android:textColor="#FFFFFF"
             android:textSize="10dip"
             android:layout_marginTop="1dip"
             android:text="Just gona stand there and ..." />
@@ -48,7 +48,7 @@
             android:text="5:45"
             android:layout_marginRight="5dip"
             android:textSize="10dip"
-            android:textColor="#10bcc9"
+            android:textColor="#6A93FF"
             android:textStyle="bold"/>
 
         <!-- Rightend Arrow -->

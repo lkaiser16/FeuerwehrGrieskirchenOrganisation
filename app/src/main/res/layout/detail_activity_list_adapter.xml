@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="TextView"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
