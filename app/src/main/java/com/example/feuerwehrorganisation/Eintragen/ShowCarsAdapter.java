@@ -11,6 +11,7 @@ import com.example.feuerwehrorganisation.Fahrzeug;
 import com.example.feuerwehrorganisation.R;
 
 import java.util.List;
+import java.util.Map;
 
 public class ShowCarsAdapter extends ArrayAdapter<Fahrzeug>
 {

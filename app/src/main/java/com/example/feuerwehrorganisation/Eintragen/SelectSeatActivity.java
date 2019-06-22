@@ -24,9 +24,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SelectSeatActivity extends AppCompatActivity
 {
@@ -121,7 +123,7 @@ public class SelectSeatActivity extends AppCompatActivity
                                     {
                                         globalSeats = sitzplätze;
 
-                                        globalSeats.put(selectedSeat, currentUser.getEmail());
+                                        globalSeats.put(selectedSeat, currentUser.getDisplayName());
                                         isFree = true;
                                         break;
                                     } else
@@ -175,7 +177,7 @@ public class SelectSeatActivity extends AppCompatActivity
                         public void onComplete(@NonNull Task<Void> task)
                         {
                             Toast.makeText(getApplicationContext(), "gespeichert!", Toast.LENGTH_SHORT).show();
-//                            finish();
+                            finish();
                         }
                     });
                 }
@@ -201,6 +203,13 @@ public class SelectSeatActivity extends AppCompatActivity
         cars = findViewById(R.id.carsToSelect);
         seats = fahrzeug1.getSitzplätze();
         seatsKeysetForListview = setToList(seats.keySet());
+        for (int i = 0; i < seats.size(); i++)
+        {
+            String funktion = seatsKeysetForListview.get(i);
+            String name = seats.get(funktion);
+            seatsKeysetForListview.set(i, funktion + ": " + name);
+        }
+        Collections.sort(seatsKeysetForListview);
         adapter = new CheckSeatAdapter(this, R.layout.auftrag_activity_cars_list_adapter, seatsKeysetForListview);
 
         cars.setAdapter(adapter);
