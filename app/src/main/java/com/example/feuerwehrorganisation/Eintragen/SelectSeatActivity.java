@@ -107,6 +107,7 @@ public class SelectSeatActivity extends AppCompatActivity
                     {
                         Log.d("", document.getId() + " => " + document.getData());
                         Auftrag a = document.toObject(Auftrag.class);
+
                         if (a.getName().equals(auftrag.getName()))
                         {
                             List<Fahrzeug> fahrzeuge = a.getFahrzeuge();

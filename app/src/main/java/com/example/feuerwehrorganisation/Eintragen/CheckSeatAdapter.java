@@ -57,7 +57,9 @@ public class CheckSeatAdapter extends ArrayAdapter<String>
                 {
 
                     howManyChecked++;
-                    SelectSeatActivity.selectedSeat = (String) buttonView.getText();
+                    String[] funktionsARR = buttonView.getText().toString().split(":");
+                    SelectSeatActivity.selectedSeat = funktionsARR[0];
+
                 } else
                 {
                     if (isChecked == true)
